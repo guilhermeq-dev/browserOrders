@@ -1,0 +1,42 @@
+<mvc:View
+	controllerName="com.lab2dev.browserorders.controller.ProductDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0">
+    <Page id="page" title="XPTO">
+		<subHeader>
+			<OverflowToolbar>
+				<SearchField liveChange=".onSearch" width="100%" />
+			</OverflowToolbar>
+		</subHeader>
+
+        <content>
+
+            <List
+                headerText="Produtos"
+                headerLevel="H2"
+                items="{/Orders}"
+                id="idList">
+                    <ObjectListItem
+                                    title="{ProductName}"
+                                    type="Active"
+                                    press="onPress"
+                                    number="{UnitPrice}"
+                                    numberUnit="USD"
+                    >
+                        <firstStatus>
+                               <ObjectStatus text="{Discontinued}" state="Success"></ObjectStatus>
+                        </firstStatus>
+
+                        <ObjectAttribute text="{UnitsInStock} in Stock" />
+                        <ObjectAttribute text="{QuantityPerUnit}" />
+                        
+                    </ObjectListItem>
+            </List>
+
+         </content>
+    </Page>
+</mvc:View>

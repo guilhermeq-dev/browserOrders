@@ -21,7 +21,9 @@ sap.ui.define([
                     console.error("Erro ao carregar os dados:", error);
                 }
             });
+        },
+        onPress: function() {
+            this.getOwnerComponent().getRouter().navTo("ProductDetail")
         }
-
     })
 });
