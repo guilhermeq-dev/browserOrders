@@ -1,9 +1,9 @@
 <mvc:View controllerName="com.lab2dev.browserorders.controller.Home"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-	<Page id="page" title="Orders">
+	<Page id="page" title="Orders ({/count})">
 		<content>
-			<List id="List"  width="auto" items="{items>/}">
+			<List id="List"  width="auto" items="{/Orders}" headerText="Orders({count})">
 				<headerToolbar>
 					<Toolbar>
 						<SearchField width="25%" search=".onSearch" showRefreshButton="true" placeholder="Search" />
@@ -13,18 +13,21 @@
 				</headerToolbar>
 				<items>
 					<ObjectListItem 
-						title="{items>OrderID}" 
-						number="{ path: 'items>OrderDate', formatter: '.formatter.formatDate' }" 
+						title="Order {OrderID}" 
+						number="{ path: 'OrderDate', formatter: '.formatter.formatDate' }" 
 						type="Navigation"
 						press="onPress" >
 						<attributes>
-							<ObjectAttribute text="{items>ShipName}" />
-							<ObjectAttribute text="Shipped: { path: 'items>ShippedDate', formatter: '.formatter.formatDate' }" />
+							<ObjectAttribute text="{ShipName}" />
+							<ObjectAttribute text="Shipped: { path: 'ShippedDate', formatter: '.formatter.formatDate' }" />
 						</attributes>
 						<firstStatus>
 							<ObjectStatus text="{
-                                parts: ['items>OrderDate', 'items>ShippedDate'],
-                                formatter: '.formatter.formatDate'}"
+                                parts: [{path: 'OrderDate'}, {path: 'ShippedDate'}],
+                                formatter: '.formatter.shipStatusText'}"
+								state="{
+                                parts: [{path: 'OrderDate'}, {path: 'ShippedDate'}],
+                                formatter: '.formatter.shipStatusState'}"
 								/>
 						</firstStatus>
 					</ObjectListItem>

@@ -2,25 +2,35 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/odata/v2/ODataModel",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
-    "../model/formatter"
+    "com/lab2dev/browserorders/model/models",
+    "com/lab2dev/browserorders/model/formatter",
+    "sap/m/MessageToast"
+],
+     /**
+     * @param {typeof sap.ui.core.mvc.Controller} Controller
+     */
+    function (Controller, ODataModel, JSONModel, models, formatter, MessageToast) {
+        "use strict";
 
-], function(Controller, ODataModel, JSONModel, Filter, FilterOperator, formatter) {
-    "use strict";
     return Controller.extend("com.lab2dev.browserorders.controller.Home", {
         formatter: formatter,
         onInit: function() {
-            const oData = new ODataModel("/northwind/northwind.svc/");
-            oData.read("/Orders", {
-                success: function(Orders) {
-                    const oModel = new JSONModel(Orders.results);
-                    this.getView().setModel(oModel, "items");
-                }.bind(this),
-                error: function(error) {
-                    console.error("Erro ao carregar os dados:", error);
-                }
-            });
+            const products = models.getProducts()
+            
+                products
+                    .then((aOrders) => {
+                        var oModel = new JSONModel({
+                            Orders: aOrders,
+                            count: aOrders.length
+                        })
+
+                        this.getView().setModel(oModel)
+                        
+                    })
+                    .catch((sError) => {
+                        var msg = sError
+                        MessageToast.show(msg);
+                    })
         },
         onPress: function() {
             this.getOwnerComponent().getRouter().navTo("ProductDetail")
