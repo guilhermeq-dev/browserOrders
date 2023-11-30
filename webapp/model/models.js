@@ -65,7 +65,6 @@ sap.ui.define([
                             oModel.read(`/Orders(${orderID})`, {
                                 ...oURLParam,
                                 success: (oData) => {
-                                    debugger
                                     resolve(oData);
                                 },
                                 error: (oError) => {

@@ -26,7 +26,7 @@ sap.ui.define([
             // }
 
             const products = models.getProducts()
-            
+                this.byId('List').setBusy(true)
                 products
                     .then((aOrders) => {
                         var oModel = new JSONModel({
@@ -35,6 +35,7 @@ sap.ui.define([
                         })
 
                         this.getView().setModel(oModel)
+                        this.byId('List').setBusy(false)
                         
                     })
                     .catch((sError) => {
@@ -46,7 +47,7 @@ sap.ui.define([
             const sOrderIndex = oEvent.getSource().getBindingContextPath().split('/')[2]
             const oOrderData = this.getView().getModel().getData().Orders[sOrderIndex]
             const orderID = oOrderData.OrderID
-            this.getOwnerComponent().getRouter().navTo("ProductDetail", {orderID})
+            this.getOwnerComponent().getRouter().navTo("OrderDetail", {orderID})
         },
         onSearch: function (oEvent) {
             var aFilter = [];

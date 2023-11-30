@@ -32,6 +32,13 @@ sap.ui.define(["sap/ui/core/format/DateFormat", "sap/ui/core/Locale" ], function
                 return "Warning"
             }
             return "Error"
+        },
+        formatValue: function (nValue) {
+            return Number.parseInt(nValue).toFixed(2)
+        },
+        formatTotalPrice: function (nPrice, nQuantity) {
+            const values = (parseInt(nPrice) * nQuantity)
+            return values.toFixed(2)
         }
     };
 });

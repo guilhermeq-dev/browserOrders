@@ -93,10 +93,10 @@
           ]
         },
         {
-          "name": "ProductDetail",
-          "pattern": "Order/{orderID}",
+          "name": "OrderDetail",
+          "pattern": "detail({orderID})",
           "target": [
-            "TargetProductDetail"
+            "TargetOrderDetail"
           ]
         }
       ],
@@ -108,12 +108,12 @@
           "viewId": "Home",
           "viewName": "Home"
         },
-        "TargetProductDetail": {
+        "TargetOrderDetail": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "ProductDetail",
-          "viewName": "ProductDetail"
+          "viewId": "OrderDetail",
+          "viewName": "OrderDetail"
         }
       }
     },

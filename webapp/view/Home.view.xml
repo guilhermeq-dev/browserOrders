@@ -6,7 +6,7 @@
 			<List id="List"  width="auto" items="{/Orders}" headerText="Orders({count})">
 				<headerToolbar>
 					<Toolbar>
-						<SearchField width="25%" search="onSearch" showRefreshButton="false" placeholder="Search" />
+						<SearchField width="20%" search="onSearch" showRefreshButton="true" placeholder="Search" />
 						<ToolbarSpacer />
 						
 					</Toolbar>

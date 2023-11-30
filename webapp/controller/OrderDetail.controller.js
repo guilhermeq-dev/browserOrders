@@ -15,7 +15,7 @@ sap.ui.define([
     	function (Controller, ODataModel, JSONModel, models, formatter, MessageToast, Filter, FilterOperator) {
         	"use strict";
 
-		return Controller.extend("com.lab2dev.browserorders.controller.ProductDetail", {
+		return Controller.extend("com.lab2dev.browserorders.controller.OrderDetail", {
 		
 		formatter: formatter,
 			
@@ -23,8 +23,8 @@ sap.ui.define([
             
 			this.oRouter = this.getOwnerComponent().getRouter();
 
-			this.oRouter.getRoute("ProductDetail").attachPatternMatched(this._onRouteMatched, this)
-
+			this.oRouter.getRoute("OrderDetail").attachPatternMatched(this._onObjectMatched, this)
+            
             this._params = {
                 urlParameters: {
                     $expand: "Order_Details/Product,Customer,Employee"
@@ -48,11 +48,11 @@ sap.ui.define([
             //             MessageToast.show(msg);
             //         })
 		},
-		_onRouteMatched: function (oEvent) {
+		_onObjectMatched: function (oEvent) {
 			const oArguments = oEvent.getParameter("arguments")
 
 			const order = models.getOrderData(oArguments.orderID, this._params)
-
+            this.byId('dynamicPageId').setBusy(true)
 			order
 				.then((oOrders) => {
 					var oModel = new JSONModel({
@@ -60,6 +60,7 @@ sap.ui.define([
 					})
 					
                     this.getView().setModel(oModel)
+                    this.byId('dynamicPageId').setBusy(false)
 				})
 		}
     })
