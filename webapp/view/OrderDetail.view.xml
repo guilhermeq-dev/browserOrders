@@ -7,6 +7,7 @@
 		xmlns:form="sap.ui.layout.form"
 		xmlns:core="sap.ui.core"
 		height="100%">
+	<Page id="pageID">
 		<f:DynamicPage id="dynamicPageId">
 			<!-- DynamicPage Title -->
 			<f:title>
@@ -29,13 +30,24 @@
 					<layout:HorizontalLayout allowWrapping="true">
 						<layout:VerticalLayout class="sapUiMediumMarginEnd">
 							<ObjectAttribute title="Customer" text="{/Customer/CompanyName}"/>
-							<ObjectAttribute title="Ordered" text="{path: '/OrderDate', formatter: '.formatter.formatDate'}"/>
-							<ObjectAttribute title="Shipped" text="{path: '/ShippedDate', formatter: '.formatter.formatDate'}"/>
+							<ObjectAttribute title="Ordered" text="{path: '/OrderDate', formatter: '.formatter.formatTextDate'}"/>
+							<ObjectAttribute title="Shipped" text="{path: '/ShippedDate', formatter: '.formatter.formatTextDate'}"/>
 						</layout:VerticalLayout>
 
 						<layout:VerticalLayout>
 							<ObjectAttribute title="Price"/>
-							<ObjectStatus text="Preço EUR" state="Success" />
+							<ObjectNumber number="{
+											parts: [
+												{path: '/newDetail/totalAmount'}
+										
+											],
+											type: 'sap.ui.model.type.Currency',
+											formatOptions: {
+												showMeasure: false
+												}
+											}" 
+											unit="{/newDetail/currencyCode}"
+											state="Warning" />
 						</layout:VerticalLayout>
 					</layout:HorizontalLayout>
 				</f:DynamicPageHeader>
@@ -177,4 +189,5 @@
 			</layout:VerticalLayout>
 			</f:content>
 		</f:DynamicPage>
+	</Page>
 </mvc:View>

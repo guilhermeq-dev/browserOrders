@@ -52,16 +52,29 @@ sap.ui.define([
 			const oArguments = oEvent.getParameter("arguments")
 
 			const order = models.getOrderData(oArguments.orderID, this._params)
-            this.byId('dynamicPageId').setBusy(true)
+            
+            this.byId('pageID').setBusy(true)
 			order
 				.then((oOrders) => {
 					var oModel = new JSONModel({
-						...oOrders,
-					})
-					
-                    this.getView().setModel(oModel)
-                    this.byId('dynamicPageId').setBusy(false)
+                        ...oOrders,
+                        newDetail: {
+                            totalAmount: this.calculateTotalPrice(oOrders.Order_Details),
+                            currencyCode: "EUR",
+                        }
+                    })
+					this.getView().setModel(oModel)
+                    this.byId('pageID').setBusy(false)
 				})
-		}
+            },
+            calculateTotalPrice: function(oOrderPrice) {
+                const totalOrderAmount = oOrderPrice.results.reduce((acc, aValue) => {
+                    const totalOrder = aValue.Quantity * +aValue.UnitPrice
+
+                    return acc + totalOrder
+                }, 0)
+
+                return totalOrderAmount.toFixed(2)
+            }
     })
 });

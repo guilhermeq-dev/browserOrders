@@ -1,9 +1,9 @@
 <mvc:View controllerName="com.lab2dev.browserorders.controller.Home"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-	<Page id="page" title="Orders ({/count})">
+	<Page id="page" title="Orders ({/Orders/length})">
 		<content>
-			<List id="List"  width="auto" items="{/Orders}" headerText="Orders({count})">
+			<List id="List"  width="auto" items="{/Orders}">
 				<headerToolbar>
 					<Toolbar>
 						<SearchField width="20%" search="onSearch" showRefreshButton="true" placeholder="Search" />
@@ -19,7 +19,7 @@
 						press="onPress" >
 						<attributes>
 							<ObjectAttribute text="{ShipName}" />
-							<ObjectAttribute text="Shipped: { path: 'ShippedDate', formatter: '.formatter.formatDate' }" />
+							<ObjectAttribute text="Shipped: { path: 'ShippedDate', formatter: '.formatter.formatTextDate' }" />
 						</attributes>
 						<firstStatus>
 							<ObjectStatus text="{

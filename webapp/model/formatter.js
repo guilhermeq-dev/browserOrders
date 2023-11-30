@@ -39,6 +39,14 @@ sap.ui.define(["sap/ui/core/format/DateFormat", "sap/ui/core/Locale" ], function
         formatTotalPrice: function (nPrice, nQuantity) {
             const values = (parseInt(nPrice) * nQuantity)
             return values.toFixed(2)
-        }
+        },
+        formatTextDate: function (sTextDate) {
+            return new Date(sTextDate).toLocaleDateString("en-us",
+                {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric"
+                })
+        },
     };
 });
