@@ -1,27 +1,20 @@
 <mvc:View
-		
+		controllerName="com.lab2dev.browserorders.controller.ProductDetail"
 		xmlns:mvc="sap.ui.core.mvc"
 		xmlns="sap.m"
 		xmlns:f="sap.f"
 		xmlns:layout="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form"
 		height="100%">
 		<f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
 			<!-- DynamicPage Title -->
 			<f:title>
 				<f:DynamicPageTitle>
 					<f:heading>
-						<Title text="Header Title"/>
+						<Title text="Order {/OrderID}"/>
 					</f:heading>
 					
-					<f:expandedContent>
-						<Label text="This is a subheading"/>
-					</f:expandedContent>
-					<f:snappedContent>
-						<Label text="This is a subheading"/>
-					</f:snappedContent>
-					<f:snappedTitleOnMobile>
-						<Title text="This is a subheading"/>
-					</f:snappedTitleOnMobile>
+					
 					<f:content>
 						<OverflowToolbar>
 							
@@ -29,9 +22,7 @@
 					</f:content>
 	
 					<f:navigationActions>
-						<Button
-								icon="sap-icon://full-screen"
-								type="Transparent" />
+						
 						<Button
 								icon="sap-icon://decline"
 								type="Transparent" />
@@ -43,13 +34,13 @@
 				<f:DynamicPageHeader pinnable="true">
 					<layout:HorizontalLayout allowWrapping="true">
 						<layout:VerticalLayout class="sapUiMediumMarginEnd">
-							<ObjectAttribute title="Location" text="Warehouse A"/>
-							<ObjectAttribute title="Halway" text="23L"/>
-							<ObjectAttribute title="Rack" text="34"/>
+							<ObjectAttribute title="Customer" text="{/Customer/CompanyName}"/>
+							<ObjectAttribute title="Ordered" text="23L"/>
+							<ObjectAttribute title="Shipped" text="34"/>
 						</layout:VerticalLayout>
 
 						<layout:VerticalLayout>
-							<ObjectAttribute title="Availability"/>
+							<ObjectAttribute title="Price"/>
 							<ObjectStatus text="In Stock" state="Success" />
 						</layout:VerticalLayout>
 					</layout:HorizontalLayout>
@@ -58,24 +49,62 @@
 			<f:content>
 			<layout:VerticalLayout
 				enabled="true"
-				width=""
-			>
-				<IconTabBar
+				width="">
+			
+			<IconTabBar
 					id="idIconTabBarMulti"
 					expanded="{device>/isNoPhone}"
 					class="sapUiResponsiveContentPadding">
-			<items>
-				<IconTabFilter
-					icon="sap-icon://notes"
-					key="notes"
-					count="12">
-					<Text text="Notes go here ..." />
-				</IconTabFilter>
-				<IconTabFilter icon="sap-icon://group" key="people">
-					<Text text="People content goes here ..." />
-				</IconTabFilter>
-			</items>
-		</IconTabBar>
+				<items>
+					<IconTabFilter icon="sap-icon://shipping-status" key="notes">
+					<VBox class="sapUiSmallMargin">
+							<form:SimpleForm id="SimpleFormDisplay353"
+									editable="false"
+									layout="ResponsiveGridLayout"
+									title="Shipping Address">
+							<form:content>
+								<Label text="Name" />
+								<Text id="nameTextt" text="{SupplierName}" />
+								<Label text="Street" />
+								<Text text="{Street} {HouseNumber}" />
+								<Label text="ZIP Code / City" />
+								<Text text="{ZIPCode} {City}" />
+								<Label text="Region" />
+								<Text id="countryTextt" text="{Country}" />
+								<Label text="Country" />
+								<Text id="countryTexttt" text="{Country}" />
+							</form:content>
+							</form:SimpleForm>
+						</VBox>
+						
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://employee" key="people">
+						<VBox class="sapUiSmallMargin">
+							<form:SimpleForm id="SimpleFormDisplay354"
+									editable="false"
+									layout="ResponsiveGridLayout"
+									title="Processor Information">
+							<form:content>
+								<Label text="Name" />
+								<Text id="nameText" text="{SupplierName}" />
+								<Label text="Employee ID" />
+								<Text text="{Street} {HouseNumber}" />
+								<Label text="Job Title" />
+								<Text text="{ZIPCode} {City}" />
+								<Label text="Phone" />
+								<Text id="countryText" text="{Country}" />
+							</form:content>
+							</form:SimpleForm>
+						</VBox>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+			
+			
+				
+			
+		
+		
 			
 				<Table id="idProductsTable"
 						sticky="HeaderToolbar,ColumnHeaders"
@@ -90,7 +119,7 @@
 					   width="auto">
 					<headerToolbar>
 						<Toolbar>
-							<Title text="Products" level="H2"/>
+							<Title text="Line Items" level="H2"/>
 						</Toolbar>
 					</headerToolbar>
 					<columns>
@@ -101,17 +130,17 @@
 						<Column
 								minScreenWidth="Tablet"
 								demandPopin="true">
-							<Text text="Supplier" />
+							<Text text="Unit Price" />
 						</Column>
 						<Column
 								minScreenWidth="Tablet"
 								demandPopin="true"
 								hAlign="End">
-							<Text text="Dimensions" />
+							<Text text="Quantity" />
 						</Column>
 						<Column
 								hAlign="End">
-							<Text text="Price" />
+							<Text text="Total" />
 						</Column>
 					</columns>
 					<items>
@@ -137,19 +166,5 @@
 				</Table>
 			</layout:VerticalLayout>
 			</f:content>
-			
-			<!-- DynamicPage Footer -->
-			<f:footer>
-				<OverflowToolbar>
-					<Button icon="sap-icon://message-popup"
-							text="{/messagesLength}"
-							type="Emphasized"
-							press="onMessageButtonPress"
-							visible="{= !!${/messagesLength}}"/>
-					<ToolbarSpacer/>
-					<Button type="Accept" text="Accept"/>
-					<Button type="Reject" text="Reject"/>
-				</OverflowToolbar>
-			</f:footer>
 		</f:DynamicPage>
 </mvc:View>

@@ -7,7 +7,7 @@ sap.ui.define(["sap/ui/core/format/DateFormat", "sap/ui/core/Locale" ], function
             var dateFormat = DateFormat.getDateTimeInstance({ pattern: "dd/MM/yyyy" }, oLocale).format(date);
             return dateFormat;
         },
-        shipStatusText: function (sOrderDate, sShipDate) {
+        statusText: function (sOrderDate, sShipDate) {
             const oOrderDate = new Date(sOrderDate)
             const oShipDate = new Date(sShipDate)
 
@@ -20,7 +20,7 @@ sap.ui.define(["sap/ui/core/format/DateFormat", "sap/ui/core/Locale" ], function
             }
             return "Too late"
         },
-        shipStatusState: function (sOrderDate, sShipDate) {
+        statusState: function (sOrderDate, sShipDate) {
             const oOrderDate = new Date(sOrderDate)
             const oShipDate = new Date(sShipDate)
 

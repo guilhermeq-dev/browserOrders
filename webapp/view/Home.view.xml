@@ -6,7 +6,7 @@
 			<List id="List"  width="auto" items="{/Orders}" headerText="Orders({count})">
 				<headerToolbar>
 					<Toolbar>
-						<SearchField width="25%" search=".onSearch" showRefreshButton="true" placeholder="Search" />
+						<SearchField width="25%" search="onSearch" showRefreshButton="false" placeholder="Search" />
 						<ToolbarSpacer />
 						
 					</Toolbar>
@@ -24,10 +24,10 @@
 						<firstStatus>
 							<ObjectStatus text="{
                                 parts: [{path: 'OrderDate'}, {path: 'ShippedDate'}],
-                                formatter: '.formatter.shipStatusText'}"
+                                formatter: '.formatter.statusText'}"
 								state="{
                                 parts: [{path: 'OrderDate'}, {path: 'ShippedDate'}],
-                                formatter: '.formatter.shipStatusState'}"
+                                formatter: '.formatter.statusState'}"
 								/>
 						</firstStatus>
 					</ObjectListItem>

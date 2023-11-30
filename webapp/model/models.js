@@ -34,13 +34,14 @@ sap.ui.define([
                 });
             },
 
-            getProducts: function () {
+            getProducts: function (oURLParam) {
                 var oDataModel = this.getODataModel();
 
                 return new Promise((resolve, reject) => {
                     oDataModel
                         .then(function (oModel) {
                             oModel.read("/Orders", {
+                                ...oURLParam,
                                 success: (oData) => {
                                     resolve(oData.results);
                                 },
@@ -54,6 +55,28 @@ sap.ui.define([
                         });
                 });
 
+            },
+            getOrderData: function (orderID, oURLParam) { 
+                var oDataModel = this.getODataModel();
+
+                return new Promise((resolve, reject) => {
+                    oDataModel
+                        .then(function (oModel) {
+                            oModel.read(`/Orders(${orderID})`, {
+                                ...oURLParam,
+                                success: (oData) => {
+                                    debugger
+                                    resolve(oData);
+                                },
+                                error: (oError) => {
+                                    reject(oError);
+                                }
+                            });
+                        })
+                        .catch(function (oError) {
+                            reject(oError);
+                        });
+                });
             }
         };
     });
