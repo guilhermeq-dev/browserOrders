@@ -64,6 +64,7 @@ sap.ui.define([
             const oList = this.byId("List");
             const oBinding = oList.getBinding("items");
             oBinding.filter(aFilter);
+            // 
             const oModel = this.getView().getModel()
             oModel.setData({...oModel.getData(), count: oBinding.getCount()})
         },

@@ -31,22 +31,7 @@ sap.ui.define([
                 }
             }
 
-            // const products = models.getProducts(params)
-            
-            //     products
-            //         .then((aOrders) => {
-            //             var oModel = new JSONModel({
-            //                 Orders: aOrders,
-            //                 count: aOrders.length
-            //             })
-
-            //             this.getView().setModel(oModel)
-                        
-            //         })
-            //         .catch((sError) => {
-            //             var msg = sError
-            //             MessageToast.show(msg);
-            //         })
+      
 		},
 		_onObjectMatched: function (oEvent) {
 			const oArguments = oEvent.getParameter("arguments")
