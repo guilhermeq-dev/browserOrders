@@ -69,7 +69,7 @@ sap.ui.define([
             },
             calculateTotalPrice: function(oOrderPrice) {
                 const totalOrderAmount = oOrderPrice.results.reduce((acc, aValue) => {
-                    const totalOrder = aValue.Quantity * +aValue.UnitPrice
+                    const totalOrder = aValue.UnitPrice * aValue.Quantity
 
                     return acc + totalOrder
                 }, 0)

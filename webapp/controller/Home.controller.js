@@ -31,8 +31,7 @@ sap.ui.define([
                     .then((aOrders) => {
                         var oModel = new JSONModel({
                             Orders: aOrders,
-                            count: aOrders.length,
-                            totalOrderAmount: 0,
+                            count: aOrders.length                            
                         })
 
                         this.getView().setModel(oModel)
@@ -52,7 +51,7 @@ sap.ui.define([
         },
         onSearch: function (oEvent) {
             var aFilter = [];
-            const sQuery = oEvent.getParameter("query");
+            const sQuery = oEvent.getSource().getValue();
             if (sQuery) {
                 const nFilters = new Filter({
                     filters: [
@@ -62,9 +61,12 @@ sap.ui.define([
                 })
                 aFilter.push(nFilters);
             }
-            const oTable = this.byId("List");
-            const oBinding = oTable.getBinding("items");
+            const oList = this.byId("List");
+            const oBinding = oList.getBinding("items");
             oBinding.filter(aFilter);
-        }
+            const oModel = this.getView().getModel()
+            oModel.setData({...oModel.getData(), count: oBinding.getCount()})
+        },
+        
     })
 });

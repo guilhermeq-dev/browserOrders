@@ -1,9 +1,9 @@
 <mvc:View controllerName="com.lab2dev.browserorders.controller.Home"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-	<Page id="page" title="Orders ({/Orders/length})">
+	<Page id="page" title="Orders ({/count})">
 		<content>
-			<List id="List"  width="auto" items="{/Orders}">
+			<List id="List"  width="auto" items="{/Orders}" >
 				<headerToolbar>
 					<Toolbar>
 						<SearchField width="20%" search="onSearch" showRefreshButton="true" placeholder="Search" />
